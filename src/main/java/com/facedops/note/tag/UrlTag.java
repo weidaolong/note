@@ -18,7 +18,7 @@ public class UrlTag extends BodyTagSupport{
 	private String regValue;
 	@Override
 	public int doStartTag() throws JspException {
-		if(searchParam==null){
+		if(searchParam==null || "".equals(searchParam)){
 			searchParam=regParam+"="+regValue;
 		}else{
 			searchParam=replaceUrl(searchParam, regParam, regValue);
