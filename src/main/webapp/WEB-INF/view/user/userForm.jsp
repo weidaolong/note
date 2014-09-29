@@ -9,9 +9,10 @@
 <body>
 
 
-<form action="save">
+<form action="${ctx}/user/create" method="post">
 
-	用户名<input type="text" name="userName">
+	用户名<input type="text" name="userName" value="${user.userName }">
+	<input type="hidden" name="id" value="${user.id }">
 	<input type="submit" value="提交">
 </form>
 

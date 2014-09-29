@@ -21,6 +21,7 @@
 	<c:if test="${not empty message}">
 		<div id="message" class="alert alert-success"><button data-dismiss="alert" class="close">×</button>${message}</div>
 	</c:if>
+	<a href="/user/create">新建</a>
 	<div class="row">
 		<div class="span4 offset7">
 			<form class="form-search" action="user" method="get">
@@ -35,8 +36,8 @@
 		<tbody>
 		<c:forEach items="${userList.content}" var="user">
 			<tr>
-				<td><a href="${ctx}/task/update/${user.id}">${user.userName}</a></td>
-				<td><a href="${ctx}/task/delete/${user.id}">删除</a></td>
+				<td><a href="${ctx}/user/update/${user.id}">${user.userName}</a></td>
+				<td><a href="${ctx}/user/delete/${user.id}">删除</a></td>
 			</tr>
 		</c:forEach>
 		</tbody>

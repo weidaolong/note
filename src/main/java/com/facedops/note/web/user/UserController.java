@@ -1,13 +1,18 @@
 package com.facedops.note.web.user;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.facedops.note.entity.rbac.Users;
 import com.facedops.note.service.user.UserService;
@@ -19,6 +24,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Page page,HttpServletRequest request,Model model,Users users) {
@@ -28,26 +34,36 @@ public class UserController {
 		model.addAttribute("users", users);
 		model.addAttribute("page", page);
 		model.addAttribute("searchParams", request.getQueryString());
-		
-		return "user/list";
-	}
-	@RequestMapping(method = RequestMethod.POST)
-	public String toList(Page page,ServletRequest request,Model model,Users users){
-		org.springframework.data.domain.Page<Users> userList=userService.getUserList(page,users);
-		model.addAttribute("userList", userList);
-		model.addAttribute("users", users);
-		model.addAttribute("page", page);
-		return "user/list";
+		return "user/userList";
 	}
 	
-	@RequestMapping(method = RequestMethod.GET,value="toadd")
-	public String toadd() {
-		return "user/add";
+	@RequestMapping(value = "create", method = RequestMethod.GET)
+	public String createForm() {
+		return "user/userForm";
 	}
 	
-	@RequestMapping(method = RequestMethod.GET,value="save")
-	public String save(Users users) {
+	@RequestMapping(value = "create", method = RequestMethod.POST)
+	public String create(@ModelAttribute("users") Users users) {
 		userService.save(users);
 		return "redirect:/user";
+	}
+	
+	@RequestMapping(value = "delete/{id}")
+	public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", "删除任务成功");
+		return "redirect:/user";
+	}
+	
+	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
+	public String updateForm(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("user", userService.getUsers(id));
+		return "/user/userForm";
+	}
+	
+	@ModelAttribute
+	public void getUser(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model) {
+		if (id != -1) {
+			model.addAttribute("task", userService.getUsers(id));
+		}
 	}
 }

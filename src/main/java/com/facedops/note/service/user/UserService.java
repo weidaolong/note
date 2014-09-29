@@ -27,7 +27,7 @@ public class UserService {
 	public org.springframework.data.domain.Page<Users> getUserList(Page page,Users users){
 		Map<String, SearchFilter> filters =Maps.newHashMap();
 		if(users.getUserName()!=null&&!"".equals(users.getUserName())){
-			filters.put("userName", new SearchFilter("userName", Operator.EQ, users.getUserName()));
+			filters.put("userName", new SearchFilter("userName", Operator.LIKE, users.getUserName()));
 		}
 		
 		PageRequest pageRequest=buildPageRequest(page);
@@ -54,6 +54,10 @@ public class UserService {
 
 	public void save(Users users){
 		userDao.save(users);
+	}
+	
+	public Users getUsers(Long id){
+		return userDao.findOne(id);
 	}
 	
 }
