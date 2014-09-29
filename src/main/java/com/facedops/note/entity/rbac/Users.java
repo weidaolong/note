@@ -3,6 +3,8 @@ package com.facedops.note.entity.rbac;// default package
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,12 +22,17 @@ import org.hibernate.search.annotations.Store;
  */
 @Entity
 @Indexed
-@Table(name = "users", catalog = "note")
+@Table(name = "SYS_USERS", catalog = "note")
 public class Users implements java.io.Serializable {
 
 	private Long id;
+	private String userNum;
 	private String userName; 
+	private Date createDate;
+	private Date updateDate;
+	private char isEnable;
 
+	
 	public Users() {
 	}
 
@@ -47,6 +54,38 @@ public class Users implements java.io.Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getUserNum() {
+		return userNum;
+	}
+
+	public void setUserNum(String userNum) {
+		this.userNum = userNum;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public char getIsEnable() {
+		return isEnable;
+	}
+
+	public void setIsEnable(char isEnable) {
+		this.isEnable = isEnable;
 	}
 
 }
