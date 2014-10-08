@@ -44,7 +44,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@ModelAttribute("users") Users users) {
+	public String create(@RequestParam(value = "file", required = false) MultipartFile file,@ModelAttribute("users") Users users) {
+		logger.info(file.getName());
 		userService.save(users);
 		return "redirect:/user";
 	}
