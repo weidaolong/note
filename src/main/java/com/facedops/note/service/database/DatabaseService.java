@@ -2,31 +2,32 @@ package com.facedops.note.service.database;
 
 import java.io.IOException;
 
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.facedops.note.repository.CommonDao;
+import com.facedops.note.util.hibernate.ConfigProperties;
 
 @Component
 @Transactional
 public class DatabaseService {
-	@Autowired
-	private CommonDao commonDao;
-	public void backFile(){
-        Runtime rt = Runtime.getRuntime();  
-        String cmd ="mysqldump -h localhost -uroot -proot note > e:/mysql.sql"; //一定要加 -h localhost(或是服务器IP地址)  
-        try {
-			rt.exec("cmd /c " + cmd);
-			System.out.println("备份成功!");  
+	private static Logger logger = LoggerFactory
+			.getLogger(DatabaseService.class);
+	String cmdPath = "D:\\Program Files\\MySQL\\MySQL Server 5.1\\bin\\mysqldump.exe"; // localhost(或是服务器IP地址)
+	String backPath = ConfigProperties.getConfig("BACKFILE_PATH");
+	
+	public void backFile(String webPath) {
+		Runtime rt = Runtime.getRuntime();
+		try {
+			rt.exec(new String[] { cmdPath, "-uroot", "-proot", "note",
+					"-r"+webPath+backPath+"\\mysql.sql" });
+			logger.info("-r"+webPath+backPath+"\\mysql.sql");
+			logger.info("备份成功!");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("备份失败!");  
+			logger.error("备份失败!");
 			e.printStackTrace();
-		}  
-
-		
+		}
 	}
-
 }
