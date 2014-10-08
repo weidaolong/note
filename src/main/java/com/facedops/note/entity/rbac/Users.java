@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
@@ -63,7 +65,8 @@ public class Users implements java.io.Serializable {
 	public void setUserNum(String userNum) {
 		this.userNum = userNum;
 	}
-
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(columnDefinition="TIMESTAMP DEFAULT '0000-00-00 00:00:00'",updatable=false)
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -71,7 +74,9 @@ public class Users implements java.io.Serializable {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(columnDefinition="TIMESTAMP DEFAULT NOW() ON UPDATE NOW()",updatable=true)
+//	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	public Date getUpdateDate() {
 		return updateDate;
 	}
