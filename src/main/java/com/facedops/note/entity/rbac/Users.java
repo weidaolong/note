@@ -85,11 +85,12 @@ public class Users implements java.io.Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public char getIsEnable() {
+	@Column(columnDefinition="SMALLINT default 0")
+	public Integer getIsEnable() {
 		return isEnable;
 	}
 
-	public void setIsEnable(char isEnable) {
+	public void setIsEnable(Integer isEnable) {
 		this.isEnable = isEnable;
 	}
 
