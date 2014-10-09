@@ -3,16 +3,19 @@ package com.facedops.note.entity.rbac;// default package
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
@@ -32,7 +35,8 @@ public class Users implements java.io.Serializable {
 	private String userName; 
 	private Date createDate;
 	private Date updateDate;
-	private char isEnable;
+	private Integer isEnable;
+	private Blob photo;
 
 	
 	public Users() {
@@ -92,6 +96,14 @@ public class Users implements java.io.Serializable {
 
 	public void setIsEnable(Integer isEnable) {
 		this.isEnable = isEnable;
+	}
+	@Lob
+	public Blob getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(Blob photo) {
+		this.photo = photo;
 	}
 
 }
