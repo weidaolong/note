@@ -59,6 +59,11 @@ public class UserService {
 	public Users getUsers(Long id){
 		return userDao.findOne(id);
 	}
+	
+	
+	public Users checkUserName(String username){
+		return userDao.findByUserName(username);
+	}
 	public void delete(Long id){
 		userDao.delete(id);
 	}

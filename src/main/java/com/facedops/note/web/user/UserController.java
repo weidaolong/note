@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -78,6 +79,23 @@ public class UserController {
 		redirectAttributes.addFlashAttribute("message", "删除任务成功");
 		userService.delete(id);
 		return "redirect:/user";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "load/{id}")
+	public Users load(@PathVariable("id") Long id) {
+		return userService.getUsers(id);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "checkUserName")
+	public String checkUserName(String username) {
+		Users users=userService.checkUserName(username);
+		if(users!=null){
+			return "用户名已存在";
+		}else{
+			return "可以使用";
+		}
 	}
 
 	@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
