@@ -16,7 +16,7 @@ public class DatabaseAction {
 	@RequestMapping(method = RequestMethod.GET)
 	public String show(HttpServletRequest request){
 		String webPath=request.getSession().getServletContext().getRealPath("");
-		service.backFile(webPath);
+		//service.backFile(webPath);
 		return "/database/databaseShow";
 	}
 	@Autowired
