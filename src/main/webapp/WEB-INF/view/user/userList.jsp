@@ -1,10 +1,7 @@
 <%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
-
+<%@include file="/taglibs.jsp"%>
 <html>
 <head>
 <title>任务管理</title>
@@ -34,7 +31,7 @@
 		<div id="message" class="alert alert-success">
 			<button data-dismiss="alert" class="close">×</button>${message}</div>
 	</c:if>
-	<a href="/user/create">新建</a>
+	<a href="${ctx}/user/create">新建</a>
 
 	<button class="btn" onclick="loadUser()">加载数据</button>
 	<div class="row">
