@@ -1,9 +1,14 @@
 package com.facedops.note.web.user;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +34,8 @@ import com.facedops.note.web.utils.Page;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	private static Long MAX_PORTRAIT_SIZE=5242880L;
 
 	private static Logger logger = LoggerFactory
 			.getLogger(UserController.class);
@@ -104,6 +111,46 @@ public class UserController {
 		return "/user/userForm";
 	}
 
+	@RequestMapping(value = "editPhoto")
+	public String editPhoto(){
+		return "/user/editPhoto";
+	}
+	@RequestMapping(value = "save_photo", method = RequestMethod.POST)
+	public String savePhoto(@RequestParam(value = "file", required = false) MultipartFile file, Model model) throws Exception{
+		if(file.isEmpty()){
+			throw new Exception("img is empty");
+		}
+		if(file.getSize()>MAX_PORTRAIT_SIZE){
+			throw new Exception("文件过大，超出2M");
+		}
+		
+		File targetFile = new File(ConfigProperties.getConfig("FILE_PATH"), file.getOriginalFilename());
+		if (!targetFile.exists()) {
+			targetFile.mkdirs();
+		}
+		file.transferTo(targetFile);
+		
+		model.addAttribute("src", targetFile.getName());
+		
+		return "/user/editPhoto";
+	}
+	@RequestMapping(value = "view", method = RequestMethod.GET)
+	public void view(String img,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		InputStream inputStream=new FileInputStream(ConfigProperties.getConfig("FILE_PATH")+"\\"+img);
+        int i=inputStream.available(); //得到文件大小   
+        byte data[]=new byte[i];   
+        inputStream.read(data);  //读数据   
+        //response.setContentType("image/*"); //设置返回的文件类型   
+        OutputStream toClient=response.getOutputStream(); //得到向客户端输出二进制数据的对象   
+        toClient.write(data);  //输出数据   
+          
+        toClient.flush();  
+        toClient.close();   
+        inputStream.close();
+		
+	}
+	
+	
 	@ModelAttribute
 	public void getUser(
 			@RequestParam(value = "id", defaultValue = "-1") Long id,
@@ -112,4 +159,7 @@ public class UserController {
 			model.addAttribute("task", userService.getUsers(id));
 		}
 	}
+	
+	
+	
 }
