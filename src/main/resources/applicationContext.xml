@@ -43,7 +43,7 @@
 	
 	<util:map id="jpaPropertyMap">
 	    <entry key="hibernate.search.default.directory_provider" value="filesystem" />
-	    <entry key="hibernate.search.default.indexBase" value="E:\indexes" />
+	    <entry key="hibernate.search.default.indexBase" value="/note/indexes" />
 	</util:map>
 	
 	<!-- Spring Data Jpa配置 -->

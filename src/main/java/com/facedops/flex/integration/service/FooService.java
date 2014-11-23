@@ -21,7 +21,7 @@ import org.springframework.flex.remoting.RemotingDestination;
 import org.springframework.flex.remoting.RemotingInclude;
 import org.springframework.stereotype.Component;
 
-import com.facedops.note.entity.rbac.Users;
+import com.facedops.note.entity.rbac.SysUser;
 import com.facedops.note.service.user.UserService;
 
 @Component
@@ -32,7 +32,7 @@ public class FooService {
 	
     @RemotingInclude
     public String bar() {
-    	Users users=UserService.checkUserName("weidaolong");
+    	SysUser users=UserService.checkUserName("weidaolong");
     	System.out.println(users);
     	System.out.println("<<<<<<<<<<<<<<<");
         return "bar";

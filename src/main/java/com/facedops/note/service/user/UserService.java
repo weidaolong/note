@@ -4,14 +4,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.facedops.note.entity.rbac.Users;
+import com.facedops.note.entity.rbac.SysUser;
 import com.facedops.note.repository.UserDao;
+import com.facedops.note.service.UtilService;
 import com.facedops.note.web.utils.BaseService;
 import com.facedops.note.web.utils.Page;
 import com.facedops.note.web.utils.SearchFilter;
@@ -24,45 +23,30 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	public org.springframework.data.domain.Page<Users> getUserList(Page page,Users users){
+	public org.springframework.data.domain.Page<SysUser> getUserList(Page page,SysUser users){
 		Map<String, SearchFilter> filters =Maps.newHashMap();
-		if(users.getUserName()!=null&&!"".equals(users.getUserName())){
-			filters.put("userName", new SearchFilter("userName", Operator.LIKE, users.getUserName()));
+		if(users.getName()!=null&&!"".equals(users.getName())){
+			filters.put("userName", new SearchFilter("userName", Operator.LIKE, users.getName()));
 		}
-		
-		PageRequest pageRequest=buildPageRequest(page);
-		Specification<Users> specification=BaseService.bySearchFilter(filters.values(), Users.class);
-		
+		PageRequest pageRequest=UtilService.buildPageRequest(page);
+		Specification<SysUser> specification=BaseService.bySearchFilter(filters.values(), SysUser.class);
 		return userDao.findAll(specification, pageRequest);
 	}
 	
-	/**
-	 * 创建分页请求.
-	 */
-	protected PageRequest buildPageRequest(Page page) {
-		Sort sort=null;
-		if(page.getOrderBy()!=null &&!"".equals(page.getOrderBy())){
-			if("asc".equals(page.getOrderType())){
-				sort = new Sort(Direction.ASC, page.getOrderBy());
-			}else if("desc".equals(page.getOrderType())){
-				sort = new Sort(Direction.DESC, page.getOrderBy());
-			}
-		}
-		return new PageRequest(page.getPageNum() - 1, page.getPageSize(), sort);
-	}
+
 	
 
-	public void save(Users users){
+	public void save(SysUser users){
 		userDao.save(users);
 	}
 	
-	public Users getUsers(Long id){
+	public SysUser getUsers(Long id){
 		return userDao.findOne(id);
 	}
 	
 	
-	public Users checkUserName(String username){
-		return userDao.findByUserName(username);
+	public SysUser checkUserName(String username){
+		return userDao.findByLoginName(username);
 	}
 	public void delete(Long id){
 		userDao.delete(id);

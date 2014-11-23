@@ -55,7 +55,7 @@
 		<tbody>
 			<c:forEach items="${userList.content}" var="user">
 				<tr>
-					<td><a href="${ctx}/user/update/${user.id}">${user.userName}</a></td>
+					<td><a href="${ctx}/user/userDetail/${user.id}">${user.name}</a></td>
 					<td><a href="${ctx}/user/delete/${user.id}">删除</a><button class="btn" onclick="loadUser('${user.id}')">加载</button></td>
 				</tr>
 			</c:forEach>

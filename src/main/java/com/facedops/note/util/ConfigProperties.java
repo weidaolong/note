@@ -1,4 +1,4 @@
-package com.facedops.note.util.hibernate;
+package com.facedops.note.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;

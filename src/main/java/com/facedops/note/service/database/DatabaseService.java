@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.facedops.note.util.hibernate.ConfigProperties;
+import com.facedops.note.util.ConfigProperties;
 
 @Component
 @Transactional

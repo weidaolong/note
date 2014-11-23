@@ -1,12 +1,17 @@
 package com.facedops.note.web.user;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,14 +29,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.facedops.note.entity.rbac.Users;
+import com.facedops.note.entity.rbac.SysUser;
 import com.facedops.note.service.user.UserService;
-import com.facedops.note.util.hibernate.ConfigProperties;
+import com.facedops.note.util.ConfigProperties;
+import com.facedops.note.util.img.Multimedia;
 import com.facedops.note.web.utils.Page;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
+	private int len=0;//处理流
+	private int mm=0;//重命名
+	private String fileName="";//文件原名
+	private String extName="";//文件扩展名
+	private String tempFileName="";//文件名加扩展名
+	
 	@Autowired
 	private UserService userService;
 	
@@ -42,9 +54,9 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(Page page, HttpServletRequest request, Model model,
-			Users users) {
+			SysUser users) {
 
-		org.springframework.data.domain.Page<Users> userList = userService
+		org.springframework.data.domain.Page<SysUser> userList = userService
 				.getUserList(page, users);
 		model.addAttribute("userList", userList);
 		model.addAttribute("users", users);
@@ -57,11 +69,24 @@ public class UserController {
 	public String createForm() {
 		return "user/userForm";
 	}
+	
+	@RequestMapping(value = "register", method = RequestMethod.GET)
+	public String register() {
+		return "user/register";
+	}
+	
+	
+	@RequestMapping(value = "save", method = RequestMethod.POST)
+	public String save(HttpServletRequest request, Model model,@ModelAttribute("users") SysUser users) {
+		userService.save(users);
+		model.addAttribute("user", users);
+		return "redirect:/userDetail";
+	}
 
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	public String create(
 			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request, @ModelAttribute("users") Users users) {
+			HttpServletRequest request, @ModelAttribute("users") SysUser users) {
 		logger.info(file.getOriginalFilename());
 		String path = request.getSession().getServletContext().getRealPath("");
 		String fileName = file.getOriginalFilename();
@@ -90,14 +115,14 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "load/{id}")
-	public Users load(@PathVariable("id") Long id) {
+	public SysUser load(@PathVariable("id") Long id) {
 		return userService.getUsers(id);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "checkUserName")
 	public String checkUserName(String username) {
-		Users users=userService.checkUserName(username);
+		SysUser users=userService.checkUserName(username);
 		if(users!=null){
 			return "用户名已存在";
 		}else{
@@ -110,11 +135,65 @@ public class UserController {
 		model.addAttribute("user", userService.getUsers(id));
 		return "/user/userForm";
 	}
+	
+	@RequestMapping(value = "userDetail/{id}", method = RequestMethod.GET)
+	public String userDetail(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("user", userService.getUsers(id));
+		return "/user/userDetail";
+	}
+	
+	
+	@RequestMapping(value = "PhotoUploadPo", method = RequestMethod.POST)
+	public String PhotoUploadPo(String photoPathOnServer,HttpServletRequest request) {
+		
+		return "/user/userDetail";
+	}
 
 	@RequestMapping(value = "editPhoto")
 	public String editPhoto(){
 		return "/user/editPhoto";
 	}
+	
+	@RequestMapping(value = "editPhoto1")
+	public String editPhoto1(){
+		return "/user/editPhoto1";
+	}
+	
+	@RequestMapping(value = "save_photo1", method = RequestMethod.POST)
+	public void savePhoto1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.reset();
+		request.setCharacterEncoding("utf-8");
+		PrintWriter out=response.getWriter();
+		String photoPathOnServer=request.getParameter("photoPathOnServer");
+		if(photoPathOnServer==null)photoPathOnServer="/upload/";
+		//System.out.println("FMSFS-->realPath:"+realPath);
+		response.setContentType("application/octet-stream");
+		InputStream is = request.getInputStream();
+		
+		try {
+				int size = 0;
+				byte[] tmp = new byte[100000];
+				SimpleDateFormat fileFormatter = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+				String fileUrl=photoPathOnServer+fileFormatter.format(new Date())+".jpg";//request.getContextPath()
+				String photoPath=ConfigProperties.getConfig("FILE_PATH")+"\\t_Koala.jpg";
+				File f = new File(photoPath);
+				DataOutputStream dos = new DataOutputStream(new FileOutputStream(f));
+				while ((len = is.read(tmp)) != -1){
+					dos.write(tmp, 0, len);
+					size += len;
+				}
+				dos.flush();
+				dos.close();
+				out.println(fileUrl);
+		} catch (IOException e) {
+			out.println("err");
+			e.printStackTrace();
+		}
+		out.close();
+	}
+	
+	
+	
 	@RequestMapping(value = "save_photo", method = RequestMethod.POST)
 	public String savePhoto(@RequestParam(value = "file", required = false) MultipartFile file, Model model) throws Exception{
 		if(file.isEmpty()){
@@ -148,6 +227,13 @@ public class UserController {
         toClient.close();   
         inputStream.close();
 		
+	}
+	@RequestMapping(value="save_portrait",method=RequestMethod.POST)
+	@ResponseBody
+	public void savePortrait(int top,int left,int width,int height) throws IOException{
+		File file=new File(ConfigProperties.getConfig("FILE_PATH")+"\\Koala.jpg");
+	    Multimedia.saveImage(file, ConfigProperties.getConfig("FILE_PATH") + "\\p_Koala.jpg", 
+	      top, left, width, height, 200, 200);
 	}
 	
 	
