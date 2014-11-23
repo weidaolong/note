@@ -7,7 +7,7 @@
 	<decorator name="account" page="account.jsp">
 		<pattern>/bg*/*</pattern>
 		<pattern>/bg*</pattern>
-		<pattern>/set</pattern>
+		<pattern>/account</pattern>
 	</decorator>
 	
 	<decorator name="default" page="default.jsp">
