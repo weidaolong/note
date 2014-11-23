@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+.s_mian_bg{
+	background: #f0f0f0;
+}
+.s_mian{
+	margin: 20px auto;
+	width: 980px;
+}
+
+.main_left {
+	width: 250px;
+	padding: 10px;
+	float: left;
+	margin-top: 30px;
+}
+
+.main_right{
+	width: 728px;
+	float: right;
+	background: #fff;
+	margin-top: 30px;
+}
+
+.clear{
+	clear: both;
+}

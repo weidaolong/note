@@ -1,0 +1,3 @@
+过滤所有请求，但还是有问题，最后发现是表单的问题，在表单中method默认是get，而以上过滤器只对post有效果，
+如果是get，需要修改 Tomcat根式目录的 conf/server.xml文件中，找<Connector port="8080" />，
+在里面加<Connector port="8080" uRIEncoding="utf-8" />
