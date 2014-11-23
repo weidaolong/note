@@ -4,7 +4,7 @@
 		<pattern>/static/*</pattern>
 	</excludes>
 	
-	<decorator name="set" page="setting.jsp">
+	<decorator name="account" page="account.jsp">
 		<pattern>/bg*/*</pattern>
 		<pattern>/bg*</pattern>
 		<pattern>/set</pattern>
