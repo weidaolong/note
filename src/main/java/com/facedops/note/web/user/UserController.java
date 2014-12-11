@@ -32,7 +32,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.facedops.note.entity.rbac.SysUser;
 import com.facedops.note.service.user.UserService;
 import com.facedops.note.util.ConfigProperties;
-import com.facedops.note.util.img.Multimedia;
 import com.facedops.note.web.utils.Page;
 
 @Controller
@@ -228,14 +227,6 @@ public class UserController {
         inputStream.close();
 		
 	}
-	@RequestMapping(value="save_portrait",method=RequestMethod.POST)
-	@ResponseBody
-	public void savePortrait(int top,int left,int width,int height) throws IOException{
-		File file=new File(ConfigProperties.getConfig("FILE_PATH")+"\\Koala.jpg");
-	    Multimedia.saveImage(file, ConfigProperties.getConfig("FILE_PATH") + "\\p_Koala.jpg", 
-	      top, left, width, height, 200, 200);
-	}
-	
 	
 	@ModelAttribute
 	public void getUser(
