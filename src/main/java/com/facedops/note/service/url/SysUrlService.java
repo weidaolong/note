@@ -26,4 +26,8 @@ public class SysUrlService {
 		Specification<SysUrl> specification=BaseService.bySearchFilter(filters.values(), SysUrl.class);
 		return sysUrlDao.findAll(specification, pageRequest);
 	}
+	
+	public void save(SysUrl sysUrl){
+		sysUrlDao.save(sysUrl);
+	}
 }

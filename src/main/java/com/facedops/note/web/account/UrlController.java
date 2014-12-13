@@ -26,7 +26,12 @@ public class UrlController {
 		model.addAttribute("sysUrl", sysUrl);
 		model.addAttribute("page", page);
 		model.addAttribute("searchParams", request.getQueryString());
-		return "/bgurl/list";
+		return "/bgurl/urlList";
+	}
+	
+	public String save(SysUrl sysUrl){
+		sysUrlService.save(sysUrl);
+		return "/bgurl/urlList";
 	}
 
 }

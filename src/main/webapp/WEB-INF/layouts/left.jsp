@@ -5,7 +5,7 @@
 <div class="sidebar">
 	<ul class="nav nav-sidebar">
 		<li>
-		<a id="persistence-tab" href="${ctx}/story/persistence">持久化高级演示</a>
+		<a id="persistence-tab" href="${ctx}/bgurl">URL管理</a>
 		</li>
 		<li>
 		<a id="persistence-tab" href="${ctx}/story/persistence">持久化高级演示</a>
