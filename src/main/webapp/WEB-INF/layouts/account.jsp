@@ -18,8 +18,8 @@
 <link rel="stylesheet" href="${ctx}/static/jquery-validate/validate.css" />
 <link rel="stylesheet" href="${ctx}/static/boostrap3.2/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${ctx}/static/boostrap3.2/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" href="${ctx}/static/css/note.css" />
-<link rel="stylesheet" href="${ctx}/static/css/setting.css" />
+<link rel="stylesheet" href="${ctx}/static/css/default.css" />
+<link rel="stylesheet" href="${ctx}/static/css/account.css" />
 
 <script type="text/javascript" src="${ctx}/static/jquery/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/boostrap3.2/js/bootstrap.min.js"></script>
@@ -39,8 +39,10 @@
 	
 <div class="container">
     <div class="row">
-<%@ include file="/WEB-INF/layouts/left.jsp"%>
+			<%@ include file="/WEB-INF/layouts/left.jsp"%>
+			<div class="main">
 			<sitemesh:body/>
+			</div>
     </div>
 </div>
 

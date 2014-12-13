@@ -38,7 +38,9 @@
 <%@ include file="/WEB-INF/layouts/header.jsp"%>
 <div class="container">
     <div class="row">
+			<div class="main">
 			<sitemesh:body/>
+			</div>
     </div>
 </div>
 </body>
