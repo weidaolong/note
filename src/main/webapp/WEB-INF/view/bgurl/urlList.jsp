@@ -28,7 +28,7 @@
 	
   	<div class="form-group">
 	          <input type="submit" class="form-control" value="查询"> 
-	          <input type="button" class="form-control" value="新建"  data-toggle="modal" data-target="#myModal"> 
+	          <a class="form-control"  href="${ctx }/bgurl/urltoAdd">新增</a> 
    </div>
   </div>
 </div>
@@ -62,38 +62,5 @@
 	</table>
 	<tags:pagination paginationSize="10" page="${list }"></tags:pagination>
 
-
-
-<form class="form-inline" role="form" action="${ctx }/bgurl/save" method="post">
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">新增URL</h4>
-      </div>
-      <div class="modal-body">
-  	<div class="form-group">
-	    <label for="urlName" class="control-label">url名称</label>
-	    <input type="text" class="form-control" id="urlName" name="urlName" value="${sysUrl.urlName }">
-	    <label for="urlName" class="control-label">url</label>
-	    <input type="text" class="form-control" id="urlName" name="url" value="${sysUrl.url }">
-	</div>
-	
-  		<div class="form-group">
-	          <input type="submit" class="form-control" value="查询"> 
-	          <input type="button" class="form-control" value="新建"  data-toggle="modal" data-target="#myModal"> 
-      </div>
-      
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary">保存</button>
-      </div>
-    </div>
-  </div>
-</div>
-</form>
 </body>
 </html>

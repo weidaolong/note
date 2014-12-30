@@ -29,6 +29,9 @@
 <script src="${ctx}/static/jcrop/js/jquery.Jcrop.min.js"></script>
 <link rel="stylesheet" href="${ctx}/static/jcrop/css/jquery.Jcrop.css" type="text/css" />
 
+
+<script type="text/javascript" src="${ctx}/static/js/account.js"></script>
+
 <title>NOTE ● <sitemesh:title/></title>
 <sitemesh:head/>
 </head>

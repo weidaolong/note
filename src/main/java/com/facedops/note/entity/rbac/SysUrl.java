@@ -26,6 +26,7 @@ public class SysUrl {
 	private Date updateDate;
 	private Integer isEnable;
 	private Long parentId;
+	private Long sort;
 	
 	
 	public SysUrl() {
@@ -95,12 +96,20 @@ public class SysUrl {
 	public void setIsEnable(Integer isEnable) {
 		this.isEnable = isEnable;
 	}
-	@Column(columnDefinition="SMALLINT default 0",insertable=false)
+	@Column(columnDefinition="SMALLINT")
 	public Long getParentId() {
 		return parentId;
 	}
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
+	}
+	@Column(columnDefinition="SMALLINT")
+	public Long getSort() {
+		return sort;
+	}
+
+	public void setSort(Long sort) {
+		this.sort = sort;
 	}
 	
 }
