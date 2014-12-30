@@ -20,6 +20,23 @@
   <div class="panel-body">
   
   	<div class="form-group">
+	  <label>根菜单</label>
+	  <select class="form-control form-horizontal" name="parentId">
+	  	<option value="">所有资源</option>
+	  	<c:forEach items="${url}" var="selecturl">
+ 			<c:choose>
+		         <c:when test="${selecturl.id==sysUrl.parentId}">
+		         	<option value="${selecturl.id}" selected="selected">${selecturl.urlName }</option>
+		         </c:when>
+		         <c:otherwise>
+		         	<option value="${selecturl.id}" >${selecturl.urlName }</option>
+		         </c:otherwise>                 
+			</c:choose>
+	  	
+	    </c:forEach>
+	  </select>
+	</div>
+  	<div class="form-group">
 	    <label for="urlName" class="control-label">url名称</label>
 	    <input type="text" class="form-control" id="urlName" name="urlName" value="${sysUrl.urlName }">
 	    <label for="urlName" class="control-label">url</label>
@@ -44,7 +61,6 @@
 				<th>配置详情</th>
 				<th>创建时间</th>
 				<th>是否可用</th>
-				<th>父目录</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -55,7 +71,6 @@
 					<td>${sysurl.comment}</td>
 					<td><fmt:formatDate value="${sysurl.createDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 					<td><c:if test="${sysurl.isEnable==0}">是</c:if><c:if test="${sysurl.isEnable!=0 }">否</c:if> </td>
-					<td><c:if test="${sysurl.parentId==0}">无</c:if> </td>
 				</tr>
 			</c:forEach>
 		</tbody>

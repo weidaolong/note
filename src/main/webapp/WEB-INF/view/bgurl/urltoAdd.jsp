@@ -47,7 +47,7 @@ function chgParentId(parentId){
 	  </select>
 	</div>
 	
-<input name="parentId" type="hidden" id="parentId" value="">
+<input name="parentId" type="hidden" id="parentId" value="0">
   <div class="form-group">
     <label for="exampleInputEmail1">资源名称</label>
     <input type="text" class="form-control" name="urlName">

@@ -25,6 +25,8 @@ public class UrlController {
 			SysUrl sysUrl){
 		org.springframework.data.domain.Page<SysUrl> list = sysUrlService
 				.getUrlList(page, sysUrl);
+		List<SysUrl> url=sysUrlService.getByParentId(0L);
+		request.setAttribute("url", url);
 		model.addAttribute("list", list);
 		model.addAttribute("sysUrl", sysUrl);
 		model.addAttribute("page", page);
