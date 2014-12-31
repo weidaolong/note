@@ -16,23 +16,28 @@
 		<property name="sysService" ref="sysService"/>
 	</bean>
 	
+	<bean id="chainFilterBuff"   class="com.facedops.note.service.ChainFilterBuff">
+	    <property name="filterChainDefinitions">
+	    <value>
+			/login = authc
+			/logout = logout
+			/static/** = anon
+			/api/** = anon
+			/register/** = anon
+			/admin/** = roles[admin]
+			/** = user
+	    </value>
+	    </property>
+	</bean>
+	
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />
 		<property name="successUrl" value="/" />
-		<property name="filterChainDefinitions">
-			<value>
-				/login = authc
-				/logout = logout
-				/static/** = anon
-				/api/** = anon
-				/register/** = anon
-				/admin/** = roles[admin]
-				/** = user
-			</value>
-		</property>
+		<property name="filterChainDefinitionMap" ref="chainFilterBuff"/>
 	</bean>
+	
 	
 	<!-- 用户授权信息Cache, 采用EhCache -->
 	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
