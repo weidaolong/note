@@ -18,7 +18,7 @@ public class ChainFilterBuff implements FactoryBean<Ini.Section> {
 	    Ini.Section section = ini.getSection(Ini.DEFAULT_SECTION_NAME);
 	    
 	    
-	    section.put("/**", "authc, roles[admin]");
+//	    section.put("/**", "authc, roles[admin]");
 	    logger.info("资源权限加载完成");
 	    logger.info(filterChainDefinitions);
 		return section;
