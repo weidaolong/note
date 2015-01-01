@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd "
 	default-lazy-init="true">
 
 	<description>Shiro安全配置</description>
@@ -30,10 +32,17 @@
 	    </property>
 	</bean>
 	
+	<bean id="sysUserFilter" class="com.facedops.note.service.SysUserFilter"/>
+	
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />
+		<property name="filters">  
+         	<util:map>
+         		
+         	</util:map>
+         </property>  
 		<property name="successUrl" value="/" />
 		<property name="filterChainDefinitionMap" ref="chainFilterBuff"/>
 	</bean>
