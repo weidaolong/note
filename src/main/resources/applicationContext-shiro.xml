@@ -32,8 +32,6 @@
 	    </property>
 	</bean>
 	
-	<bean id="sysUserFilter" class="com.facedops.note.service.SysUserFilter"/>
-	
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
