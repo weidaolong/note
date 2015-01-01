@@ -40,7 +40,6 @@
 		<property name="loginUrl" value="/login" />
 		<property name="filters">  
          	<util:map>
-         		
          	</util:map>
          </property>  
 		<property name="successUrl" value="/" />
