@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.facedops.note.entity.rbac.SysUser;
+import com.facedops.note.page.service.UtilService;
 import com.facedops.note.repository.UserDao;
-import com.facedops.note.service.UtilService;
 import com.facedops.note.web.utils.BaseService;
 import com.facedops.note.web.utils.Page;
 import com.facedops.note.web.utils.SearchFilter;
