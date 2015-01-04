@@ -1,4 +1,4 @@
-package com.facedops.note.service;
+package com.facedops.note.page.service;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

@@ -7,6 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,10 +23,15 @@ public class SessionFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request,
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		Subject subject = SecurityUtils.getSubject();
+		Session  session=subject.getSession();
 		
-		System.out.println("---------"+i++ +"---------------");
-		System.out.println(request.getRequestURI());
-		
+		Object name=session.getAttribute("name");
+		System.out.println(name);
+		if(name==null){
+			session.setAttribute("name", "张三"+i);
+			i++;
+		}
 		filterChain.doFilter(request, response);  
 	}
 

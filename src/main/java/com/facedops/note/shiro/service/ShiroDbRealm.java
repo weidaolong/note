@@ -1,4 +1,4 @@
-package com.facedops.note.service;
+package com.facedops.note.shiro.service;
 
 import java.io.Serializable;
 

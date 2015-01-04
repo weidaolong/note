@@ -17,11 +17,11 @@
 		<property name="globalSessionTimeout" value="1200000" />  
 	</bean>
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
-	<bean id="shiroDbRealm" class="com.facedops.note.service.ShiroDbRealm">
+	<bean id="shiroDbRealm" class="com.facedops.note.shiro.service.ShiroDbRealm">
 		<property name="sysService" ref="sysService"/>
 	</bean>
 	
-	<bean id="chainFilterBuff"   class="com.facedops.note.service.ChainFilterBuff">
+	<bean id="chainFilterBuff"   class="com.facedops.note.shiro.service.ChainFilterBuff">
 	    <property name="filterChainDefinitions">
 	    <value>
 			/login = authc
