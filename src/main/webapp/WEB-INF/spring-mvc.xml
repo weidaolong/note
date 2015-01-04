@@ -37,4 +37,7 @@
 	<!-- 定义无需Controller的url<->view直接映射 -->
 	<mvc:view-controller path="/" view-name="redirect:/user"/>
 	
+	
+		<bean id="SpringContextUtil"
+		class="com.facedops.note.spring.SpringContextUtil" />
 </beans>

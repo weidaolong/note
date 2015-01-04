@@ -3,6 +3,7 @@ package com.facedops.note.shiro.service;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.Null;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -16,6 +17,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
+import com.facedops.note.constant.RoleConstant;
 import com.facedops.note.entity.rbac.SysUser;
 import com.facedops.note.modules.util.Encodes;
 import com.facedops.note.service.sys.SysService;
@@ -49,7 +51,11 @@ public class ShiroDbRealm extends AuthorizingRealm{
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
 		SysUser user = sysService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(user.getRoleList());
+		if(user==null || user.getRoleList()==null){
+			info.addRole(RoleConstant.VISITOR);
+		}else{
+			info.addRoles(user.getRoleList());
+		}
 		return info;
 	}
 	
