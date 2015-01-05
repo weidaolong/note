@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	default-lazy-init="true">
+
+	<!-- redis manager class -->
+    <bean id="jedisManager" class="com.facedops.note.util.redis.JedisManager">
+        <property name="jedisPool" ref="jedisPool"/>
+    </bean>
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxIdle" value="300" />  
+        <property name="testOnBorrow" value="true" />  
+    </bean> 
+
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="poolConfig"/>
+        <constructor-arg index="1" value="192.168.56.101"/>
+        <constructor-arg index="2" value="6379"/>
+    </bean>
+</beans>

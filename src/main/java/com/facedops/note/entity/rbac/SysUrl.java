@@ -2,6 +2,7 @@ package com.facedops.note.entity.rbac;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import org.hibernate.search.annotations.Indexed;
 @Entity
 @Indexed
 @Table(name = "SYS_URL", catalog = "note")
-public class SysUrl {
+public class SysUrl implements Serializable{
 	private Long id;
 	private String url;
 	private String urlName;

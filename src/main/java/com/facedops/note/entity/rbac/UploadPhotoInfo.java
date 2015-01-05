@@ -2,6 +2,7 @@ package com.facedops.note.entity.rbac;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,7 +18,7 @@ import org.hibernate.search.annotations.Indexed;
 @Entity
 @Indexed
 @Table(catalog = "note")
-public class UploadPhotoInfo {
+public class UploadPhotoInfo implements Serializable{
 	private Long UploadPhotoInfoId;
 	private String photoName;
 	private String photoPath;

@@ -13,13 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.facedops.note.constant.RoleConstant;
 import com.facedops.note.entity.rbac.SysUrl;
 import com.facedops.note.service.url.SysUrlService;
 import com.facedops.note.spring.SpringContextUtil;
 public class SessionFilter extends OncePerRequestFilter{
+	private static Logger logger = LoggerFactory
+			.getLogger(SessionFilter.class);
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,
 			HttpServletResponse response, FilterChain filterChain)
@@ -29,8 +32,8 @@ public class SessionFilter extends OncePerRequestFilter{
 		
 		@SuppressWarnings("unchecked")
 		Map<String, List<SysUrl>> categorys=(Map<String, List<SysUrl>>) session.getAttribute("categorys");
-		//
-		if(categorys==null && !subject.hasRole(RoleConstant.VISITOR)){
+		// && !subject.hasRole(RoleConstant.VISITOR)
+		if(categorys==null){
 			categorys=new HashMap<String, List<SysUrl>>();
 			
 			SysUrlService sysUrlService=(SysUrlService) SpringContextUtil.getBean("sysUrlService");
@@ -41,6 +44,7 @@ public class SessionFilter extends OncePerRequestFilter{
 			}
 			 session.setAttribute("categorys",categorys);
 		}
+		logger.info("--------session-update-----------");
 		filterChain.doFilter(request, response);  
 	}
 }

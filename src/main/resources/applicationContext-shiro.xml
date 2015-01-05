@@ -11,11 +11,17 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="sessionManager" ref="sessionManager"/>
 		<property name="realm" ref="shiroDbRealm" />
-		<property name="cacheManager" ref="shiroEhcacheManager" />
+		<property name="cacheManager" ref="customShiroCacheManager" />
 	</bean>
 	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-		<property name="globalSessionTimeout" value="1200000" />  
+		<property name="globalSessionTimeout" value="1200000" />
+		<property name="sessionDAO" ref="customShiroSessionDAO"/>  
 	</bean>
+	
+	<bean id="customShiroSessionDAO" class="com.facedops.note.shiro.dao.CustomShiroSessionDAO">  
+    	<property name="shiroSessionRepository" ref="jedisShiroSessionRepository" />  
+	</bean>  
+      
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
 	<bean id="shiroDbRealm" class="com.facedops.note.shiro.service.ShiroDbRealm">
 		<property name="sysService" ref="sysService"/>
@@ -48,11 +54,11 @@
 	</bean>
 	
 	
-	<!-- 用户授权信息Cache, 采用EhCache -->
+	<!-- 用户授权信息Cache, 采用EhCache 
 	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
 		<property name="cacheManagerConfigFile" value="classpath:ehcache/ehcache-shiro.xml"/>
 	</bean>
-	
+	-->
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 	
@@ -63,4 +69,17 @@
 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
     	<property name="securityManager" ref="securityManager"/>
 	</bean>
+	
+    <!-- custom save session by redis class impl ShiroSessionRepository interface -->
+    <bean id="jedisShiroSessionRepository" class="com.facedops.note.shiro.dao.impl.JedisShiroSessionRepository">
+        <property name="jedisManager" ref="jedisManager" />
+    </bean>
+
+
+	<bean id="customShiroCacheManager" class="com.facedops.note.shiro.cache.CustomShiroCacheManager">  
+	    <property name="shiroCacheManager" ref="jedisShiroCacheManager" />  
+	</bean>  
+	      
+	<bean id="jedisShiroCacheManager" class="com.facedops.note.shiro.cache.JedisShiroCacheManager" /> 
+	
 </beans>
