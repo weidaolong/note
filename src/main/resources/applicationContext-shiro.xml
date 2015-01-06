@@ -80,6 +80,8 @@
 	    <property name="shiroCacheManager" ref="jedisShiroCacheManager" />  
 	</bean>  
 	      
-	<bean id="jedisShiroCacheManager" class="com.facedops.note.shiro.cache.JedisShiroCacheManager" /> 
+	<bean id="jedisShiroCacheManager" class="com.facedops.note.shiro.cache.JedisShiroCacheManager" >
+		<property name="JedisManager" ref="jedisManager"/>
+	</bean> 
 	
 </beans>
