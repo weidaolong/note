@@ -3,7 +3,6 @@ package com.facedops.note.shiro.service;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.validation.constraints.Null;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -48,6 +47,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		System.out.println("启用缓存");
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
 		SysUser user = sysService.findUserByLoginName(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();

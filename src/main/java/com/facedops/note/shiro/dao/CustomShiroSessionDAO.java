@@ -17,7 +17,7 @@ public class CustomShiroSessionDAO extends AbstractSessionDAO{
 
     @Override
     public void update(Session session) throws UnknownSessionException {
-    	logger.debug("update session");
+    	logger.info("update session");
         getShiroSessionRepository().saveSession(session);
     }
 
@@ -28,7 +28,7 @@ public class CustomShiroSessionDAO extends AbstractSessionDAO{
         }
         Serializable id = session.getId();
         if (id != null) {
-        	logger.debug("delete session");
+        	logger.info("delete session");
             getShiroSessionRepository().deleteSession(id);
         }
         //TODO if session is too large,when session destory clear shiro cache
@@ -36,13 +36,13 @@ public class CustomShiroSessionDAO extends AbstractSessionDAO{
 
     @Override
     public Collection<Session> getActiveSessions() {
-    	logger.debug("get active sessions");
+    	logger.info("get active sessions");
         return getShiroSessionRepository().getAllSessions();
     }
 
     @Override
     protected Serializable doCreate(Session session) {
-    	logger.debug("do create session");
+    	logger.info("do create session");
         Serializable sessionId = this.generateSessionId(session);
         this.assignSessionId(session, sessionId);
         getShiroSessionRepository().saveSession(session);
@@ -51,7 +51,7 @@ public class CustomShiroSessionDAO extends AbstractSessionDAO{
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
-    	logger.debug("do read session");
+    	logger.info("do read session");
         return getShiroSessionRepository().getSession(sessionId);
     }
 

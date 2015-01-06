@@ -20,7 +20,7 @@ public class JedisShiroCacheManager implements ShiroCacheManager {
 
     @Override
     public void destroy() {
-        getJedisManager().getJedis().shutdown();
+        //getJedisManager().getJedis().shutdown();
     }
 
     public JedisManager getJedisManager() {
