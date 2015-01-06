@@ -16,12 +16,20 @@
 	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<property name="globalSessionTimeout" value="1200000" />
 		<property name="sessionDAO" ref="customShiroSessionDAO"/>  
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionListeners">
+ 			<list>
+                <ref bean="customSessionListener"/>
+            </list>
+        </property>
 	</bean>
 	
 	<bean id="customShiroSessionDAO" class="com.facedops.note.shiro.dao.CustomShiroSessionDAO">  
     	<property name="shiroSessionRepository" ref="jedisShiroSessionRepository" />  
 	</bean>  
-      
+	<bean id="customSessionListener" class="com.facedops.note.shiro.listener.CustomSessionListener">  
+    	<property name="shiroSessionRepository" ref="jedisShiroSessionRepository" />  
+	</bean>      
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
 	<bean id="shiroDbRealm" class="com.facedops.note.shiro.service.ShiroDbRealm">
 		<property name="sysService" ref="sysService"/>
