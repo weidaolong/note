@@ -19,32 +19,38 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.facedops.note.entity.rbac.SysUrl;
 import com.facedops.note.service.url.SysUrlService;
+import com.facedops.note.shiro.service.ShiroDbRealm.ShiroUser;
 import com.facedops.note.spring.SpringContextUtil;
-public class SessionFilter extends OncePerRequestFilter{
-	private static Logger logger = LoggerFactory
-			.getLogger(SessionFilter.class);
+
+public class SessionFilter extends OncePerRequestFilter {
+	private static Logger logger = LoggerFactory.getLogger(SessionFilter.class);
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		Subject subject = SecurityUtils.getSubject();
-		Session  session=subject.getSession();
-		
-		@SuppressWarnings("unchecked")
-		Map<String, List<SysUrl>> categorys=(Map<String, List<SysUrl>>) session.getAttribute("categorys");
-		// && !subject.hasRole(RoleConstant.VISITOR)
-		if(categorys==null){
-			categorys=new HashMap<String, List<SysUrl>>();
-			
-			SysUrlService sysUrlService=(SysUrlService) SpringContextUtil.getBean("sysUrlService");
-			List<SysUrl> rootUrls=sysUrlService.getByParentId(0L);
-			for(SysUrl roostUrl:rootUrls){
-				List<SysUrl> childUrls=sysUrlService.getByParentId(roostUrl.getParentId());
-				categorys.put(roostUrl.getUrlName(), childUrls);
+		Session session = subject.getSession();
+		if (subject.isAuthenticated()) {
+			@SuppressWarnings("unchecked")
+			Map<String, List<SysUrl>> categorys = (Map<String, List<SysUrl>>) session.getAttribute("categorys");
+			if (categorys == null) {
+				ShiroUser shiroUser =(ShiroUser) subject.getPrincipal();
+				logger.info(shiroUser.getName()+"认证成功，更新session");
+				categorys = new HashMap<String, List<SysUrl>>();
+
+				SysUrlService sysUrlService = (SysUrlService) SpringContextUtil
+						.getBean("sysUrlService");
+				List<SysUrl> rootUrls = sysUrlService.getByParentId(0L);
+				for (SysUrl roostUrl : rootUrls) {
+					List<SysUrl> childUrls = sysUrlService
+							.getByParentId(roostUrl.getParentId());
+					categorys.put(roostUrl.getUrlName(), childUrls);
+				}
+				session.setAttribute("categorys", categorys);
 			}
-			 session.setAttribute("categorys",categorys);
 		}
-		logger.info("--------session-update-----------");
-		filterChain.doFilter(request, response);  
+
+		filterChain.doFilter(request, response);
 	}
 }
