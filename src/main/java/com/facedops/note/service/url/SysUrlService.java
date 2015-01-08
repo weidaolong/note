@@ -2,11 +2,14 @@ package com.facedops.note.service.url;
 
 import java.util.List;
 import java.util.Map;
+
+import org.activiti.engine.RepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.facedops.note.entity.rbac.SysUrl;
 import com.facedops.note.page.service.UtilService;
 import com.facedops.note.repository.SysUrlDao;
@@ -21,7 +24,8 @@ import com.google.common.collect.Maps;
 public class SysUrlService {
 	@Autowired
 	private SysUrlDao sysUrlDao;
-	
+	@Autowired
+	private RepositoryService repositoryService;
 	public org.springframework.data.domain.Page<SysUrl> getUrlList(Page page,SysUrl sysUrl){
 		Map<String, SearchFilter> filters =Maps.newHashMap();
 		

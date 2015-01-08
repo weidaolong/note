@@ -35,7 +35,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
 		SysUser user = sysService.findUserByLoginName(token.getUsername());
 		if (user != null) {
 			byte[] salt = Encodes.decodeHex(user.getSalt());
-			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getName()),
+			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName()),
 					user.getPassword(), ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;
@@ -63,22 +63,19 @@ public class ShiroDbRealm extends AuthorizingRealm{
 		private static final long serialVersionUID = 5185280597944751535L;
 		public Long id;
 		public String loginName;
-		public String name;
-		public ShiroUser(Long id, String loginName, String name) {
+		public ShiroUser(Long id, String loginName) {
 			this.id = id;
 			this.loginName = loginName;
-			this.name = name;
 		}
-
-		public String getName() {
-			return name;
-		}
-
 		/**
 		 * 本函数输出将作为默认的<shiro:principal/>输出.
 		 */
 		@Override
 		public String toString() {
+			return loginName;
+		}
+		
+		public String getName(){
 			return loginName;
 		}
 

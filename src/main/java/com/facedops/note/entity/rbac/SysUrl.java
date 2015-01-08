@@ -27,14 +27,17 @@ public class SysUrl implements Serializable{
 	private Date updateDate;
 	private Integer isEnable;
 	private Long parentId;
-	private Long sort;
+	private String layerCode;
 	
 	
 	public SysUrl() {
 	}
-	
+
+
+
 	public SysUrl(Long id, String url, String urlName, String comment,
-			Date createDate, Date updateDate, Integer isEnable, Long parentId) {
+			Date createDate, Date updateDate, Integer isEnable, Long parentId,
+			String layerCode) {
 		this.id = id;
 		this.url = url;
 		this.urlName = urlName;
@@ -43,7 +46,11 @@ public class SysUrl implements Serializable{
 		this.updateDate = updateDate;
 		this.isEnable = isEnable;
 		this.parentId = parentId;
+		this.layerCode = layerCode;
 	}
+
+
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
@@ -104,13 +111,15 @@ public class SysUrl implements Serializable{
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
-	@Column(columnDefinition="SMALLINT")
-	public Long getSort() {
-		return sort;
+
+	public String getLayerCode() {
+		return layerCode;
 	}
 
-	public void setSort(Long sort) {
-		this.sort = sort;
+
+
+	public void setLayerCode(String layerCode) {
+		this.layerCode = layerCode;
 	}
-	
+
 }

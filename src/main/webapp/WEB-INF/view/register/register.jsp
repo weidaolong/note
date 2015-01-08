@@ -40,12 +40,6 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label for="name" class="control-label">用户名:</label>
-				<div class="controls">
-					<input type="text" id="name" name="name" class="input-large required form-control"/>
-				</div>
-			</div>
-			<div class="control-group">
 				<label for="name" class="control-label">邮箱:</label>
 				<div class="controls">
 					 <input name="userMail" type="email" class="form-control required"  placeholder="Email">

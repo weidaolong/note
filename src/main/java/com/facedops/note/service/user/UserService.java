@@ -25,8 +25,8 @@ public class UserService {
 	
 	public org.springframework.data.domain.Page<SysUser> getUserList(Page page,SysUser users){
 		Map<String, SearchFilter> filters =Maps.newHashMap();
-		if(users.getName()!=null&&!"".equals(users.getName())){
-			filters.put("userName", new SearchFilter("userName", Operator.LIKE, users.getName()));
+		if(users.getLoginName()!=null&&!"".equals(users.getLoginName())){
+			filters.put("loginName", new SearchFilter("loginName", Operator.LIKE, users.getLoginName()));
 		}
 		PageRequest pageRequest=UtilService.buildPageRequest(page);
 		Specification<SysUser> specification=BaseService.bySearchFilter(filters.values(), SysUser.class);

@@ -19,11 +19,7 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -39,7 +35,6 @@ public class SysUser implements java.io.Serializable {
 
 	private Long id;
 	private String loginName;
-	private String Name;
 	private String userMail;
 	private String plainPassword;
 	private String password;
@@ -64,15 +59,6 @@ public class SysUser implements java.io.Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
-	public String getName() {
-		return Name;
-	}
-	
-	public void setName(String name) {
-		Name = name;
 	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+08:00")
