@@ -27,8 +27,6 @@
 <script type="text/javascript" src="${ctx}/static/jquery-validate/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery-validate/messages_zh.js"></script>
 
-<script src="${ctx}/static/jcrop/js/jquery.Jcrop.min.js"></script>
-<link rel="stylesheet" href="${ctx}/static/jcrop/css/jquery.Jcrop.css" type="text/css" />
 
 <title>NOTE ● <sitemesh:title/></title>
 <sitemesh:head/>
