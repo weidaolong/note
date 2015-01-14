@@ -2,14 +2,7 @@
 <decorators defaultdir="/WEB-INF/layouts">
 	<excludes>
 		<pattern>/static/*</pattern>
-	</excludes>
-	
-	<decorator name="account" page="account.jsp">
-		<pattern>/bg*/*</pattern>
-		<pattern>/bg*</pattern>
-		<pattern>/account</pattern>
-	</decorator>
-	
+	</excludes>	
 	<decorator name="default" page="default.jsp">
 		<pattern>/*</pattern>
 	</decorator>
