@@ -5,34 +5,40 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta http-equiv="Cache-Control" content="no-store" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-<!-- boostrap setting -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="${ctx}/static/jquery-validate/validate.css" />
-<link rel="stylesheet" href="${ctx}/static/boostrap3.2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="${ctx}/static/boostrap3.2/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" href="${ctx}/static/css/default.css" />
-<link rel="stylesheet" href="${ctx}/static/css/note.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<script type="text/javascript" src="${ctx}/static/jquery/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="${ctx}/static/boostrap3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${ctx}/static/jquery-validate/jquery.validate.min.js"></script>
-<script type="text/javascript" src="${ctx}/static/jquery-validate/messages_zh.js"></script>
+    <title>NOTE ● <sitemesh:title/></title>
+    
+    <link href="${ctx}/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="${ctx}/static/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <!-- Timeline CSS -->
+    <link href="${ctx}/static/css/timeline.css" rel="stylesheet">
 
+    <!-- Custom CSS -->
+    <link href="${ctx}/static/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="${ctx}/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-<title>NOTE ● <sitemesh:title/></title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="${ctx}/static/html5shiv.js"></script>
+        <script src="${ctx}/static/respond.min.js"></script>
+    <![endif]-->
 <sitemesh:head/>
 </head>
 
 <body>
+<div id="wrapper">
 <%@ include file="/WEB-INF/layouts/header.jsp"%>
 <div class="container">
     <div class="row">
@@ -41,6 +47,20 @@
 			</div>
     </div>
 </div>
+</div>
+
+    <!-- jQuery -->
+    <script src="${ctx}/static/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="${ctx}/static/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="${ctx}/static/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="${ctx}/static/js/sb-admin-2.js"></script>
+
 </body>
 
 </html>
