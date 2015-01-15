@@ -20,8 +20,6 @@
     <link href="${ctx}/static/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="${ctx}/static/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-    <!-- Timeline CSS -->
-    <link href="${ctx}/static/css/timeline.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="${ctx}/static/css/sb-admin-2.css" rel="stylesheet">
