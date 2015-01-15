@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator" %>  
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<%@include file="/taglibs.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,23 +29,28 @@
         <script src="${ctx}/static/html5shiv.js"></script>
         <script src="${ctx}/static/respond.min.js"></script>
     <![endif]-->
+    <!-- jQuery -->
+    <script src="${ctx}/static/jquery/dist/jquery.min.js"></script>
 <sitemesh:head/>
 </head>
 
 <body>
 <div id="wrapper">
-<%@ include file="/WEB-INF/layouts/header.jsp"%>
-<div class="container">
-    <div class="row">
-			<div class="main">
-			<sitemesh:body/>
-			</div>
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+			<%@ include file="/WEB-INF/layouts/header.jsp"%>
+			<%@ include file="/WEB-INF/layouts/menu.jsp"%>
+	</nav>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"></h1>
+            </div>
+        </div>
+        <sitemesh:body/>
     </div>
-</div>
+
 </div>
 
-    <!-- jQuery -->
-    <script src="${ctx}/static/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="${ctx}/static/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -58,7 +60,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="${ctx}/static/js/sb-admin-2.js"></script>
-
 </body>
 
 </html>

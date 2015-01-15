@@ -6,15 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>url配置信息</title>
-<script type="text/javascript">
+    <!-- DataTables CSS -->
+    <link href="${ctx}/static/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 
-
-</script>
+    <!-- DataTables Responsive CSS -->
+    <link href="${ctx}/static/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 </head>
 <body>
 
 
-<form class="form-inline" role="form" action="${ctx }/bgurl" method="get">
+<form class="form-inline" role="form" action="${ctx }/url_list" method="get">
 <div class="panel panel-default">
 <div class="panel-heading">查询条件</div>
   <div class="panel-body">
@@ -76,6 +77,15 @@
 		</tbody>
 	</table>
 	<tags:pagination paginationSize="10" page="${list }"></tags:pagination>
-
+    <script src="${ctx}/static/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="${ctx}/static/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#contentTable').DataTable({
+                responsive: true
+        });
+    });
+    </script>
 </body>
 </html>

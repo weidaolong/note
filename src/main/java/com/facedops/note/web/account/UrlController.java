@@ -16,7 +16,7 @@ import com.facedops.note.service.url.SysUrlService;
 import com.facedops.note.web.utils.Page;
 
 @Controller
-@RequestMapping(value="bgurl")
+@RequestMapping(value="url_list")
 public class UrlController {
 	@Autowired
 	private SysUrlService sysUrlService;
@@ -31,7 +31,7 @@ public class UrlController {
 		model.addAttribute("sysUrl", sysUrl);
 		model.addAttribute("page", page);
 		model.addAttribute("searchParams", request.getQueryString());
-		return "/bgurl/urlList";
+		return "/url/url_list";
 	}
 	
 	
