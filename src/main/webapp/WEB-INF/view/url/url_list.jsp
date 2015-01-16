@@ -6,16 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>url配置信息</title>
-    <!-- DataTables CSS -->
-    <link href="${ctx}/static/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="${ctx}/static/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 </head>
 <body>
 
 
-<form class="form-inline" role="form" action="${ctx }/url_list" method="get">
+<form class="form-inline" role="form" action="${ctx }/url/list" method="get">
 <div class="panel panel-default">
 <div class="panel-heading">查询条件</div>
   <div class="panel-body">
@@ -53,8 +48,7 @@
 
 </form>
 
-	<table id="contentTable"
-		class="table table-striped table-bordered table-condensed">
+	  <table class="table table-striped table-bordered table-hover" id="contentTable" >
 		<thead>
 			<tr>
 				<th>url名称</th>
@@ -67,7 +61,7 @@
 		<tbody>
 			<c:forEach items="${list.content}" var="sysurl">
 				<tr>
-					<td>${sysurl.urlName}</td>
+					<td class="odd gradeX">${sysurl.urlName}</td>
 					<td>${sysurl.url}</td>
 					<td>${sysurl.comment}</td>
 					<td><fmt:formatDate value="${sysurl.createDate}" pattern="yyyy-MM-dd HH:mm"/></td>
@@ -77,15 +71,5 @@
 		</tbody>
 	</table>
 	<tags:pagination paginationSize="10" page="${list }"></tags:pagination>
-    <script src="${ctx}/static/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="${ctx}/static/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        $('#contentTable').DataTable({
-                responsive: true
-        });
-    });
-    </script>
 </body>
 </html>

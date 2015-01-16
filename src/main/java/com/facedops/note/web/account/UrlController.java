@@ -16,12 +16,12 @@ import com.facedops.note.service.url.SysUrlService;
 import com.facedops.note.web.utils.Page;
 
 @Controller
-@RequestMapping(value="url_list")
+@RequestMapping(value="url")
 public class UrlController {
 	@Autowired
 	private SysUrlService sysUrlService;
-	@RequestMapping(method = RequestMethod.GET)
-	public String url(Page page, HttpServletRequest request, Model model,
+	@RequestMapping(method = RequestMethod.GET,value="list")
+	public String url_post(Page page, HttpServletRequest request, Model model,
 			SysUrl sysUrl){
 		org.springframework.data.domain.Page<SysUrl> list = sysUrlService
 				.getUrlList(page, sysUrl);
@@ -33,7 +33,6 @@ public class UrlController {
 		model.addAttribute("searchParams", request.getQueryString());
 		return "/url/url_list";
 	}
-	
 	
 	@RequestMapping(method = RequestMethod.GET,value="urltoAdd")
 	public String urltoAdd(Page page, HttpServletRequest request){

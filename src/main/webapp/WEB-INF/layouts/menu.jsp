@@ -21,7 +21,7 @@
                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> 后台管理<span class="fa arrow"></span></a>
                    <ul class="nav nav-second-level">
                        <li>
-                           <a href="${ctx }/url_list">资源管理</a>
+                           <a href="${ctx }/url/list">资源管理</a>
                        </li>
                        <li>
                            <a href="${ctx }/">权限管理</a>
