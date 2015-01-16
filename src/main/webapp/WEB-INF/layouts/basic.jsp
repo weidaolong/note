@@ -21,8 +21,7 @@
     <!-- MetisMenu CSS -->
     <link href="${ctx}/static/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="${ctx}/static/css/sb-admin-2.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <link href="${ctx}/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -32,7 +31,9 @@
         <script src="${ctx}/static/html5shiv.js"></script>
         <script src="${ctx}/static/respond.min.js"></script>
     <![endif]-->
-<sitemesh:head/>
+	<sitemesh:head/>
+    <!-- Custom CSS -->
+    <link href="${ctx}/static/css/sb-admin-2.css" rel="stylesheet">
 </head>
 
 <body>
