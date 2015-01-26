@@ -47,7 +47,7 @@ public class UrlController {
 		return "redirect:/bgurl";
 	}
 	@ResponseBody
-	@RequestMapping(method = RequestMethod.GET,value="getByParentId")
+	@RequestMapping(value="getByParentId")
 	public List<SysUrl> getByParentId(Long parentId){
 		return sysUrlService.getByParentId(parentId);
 	}

@@ -6,8 +6,84 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>url配置信息</title>
+<script type="text/javascript">
+ var setting = {
+			async: {
+				enable: true,
+				dataType: 'JSON',
+				url: "${ctx}/url/getByParentId",
+				autoParam:["id", "name=n", "level=lv"],
+				otherParam:{"otherParam":"zTreeAsyncTest"}
+			},
+			data : {
+				key: {
+					name: "urlName",
+				},
+				simpleData: {
+					enable: false,
+					idKey: "id",
+					pIdKey: "parentId",
+					rootPId: null
+				},
+			}
+ };
+ 
+	function beforeClick(treeId, treeNode) {
+		if (!treeNode.isParent) {
+			alert("请选择父节点");
+			return false;
+		} else {
+			return true;
+		}
+	}
+	function beforeAsync(treeId, treeNode) {
+		className = (className === "dark" ? "":"dark");
+		showLog("[ "+getTime()+" beforeAsync ]&nbsp;&nbsp;&nbsp;&nbsp;" + ((!!treeNode && !!treeNode.name) ? treeNode.name : "root") );
+		return true;
+	}
+	function onAsyncError(event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown) {
+		showLog("[ "+getTime()+" onAsyncError ]&nbsp;&nbsp;&nbsp;&nbsp;" + ((!!treeNode && !!treeNode.name) ? treeNode.name : "root") );
+	}
+	function onAsyncSuccess(event, treeId, treeNode, msg) {
+		showLog("[ "+getTime()+" onAsyncSuccess ]&nbsp;&nbsp;&nbsp;&nbsp;" + ((!!treeNode && !!treeNode.name) ? treeNode.name : "root") );
+	}
+		
+	 $(function($) {
+		 zTreeObj = $.fn.zTree.init($("#ztree"), setting);
+	 });
+
+</script>
 </head>
 <body>
+
+
+
+<div class="row">
+   <div class="col-lg-6">
+       <div class="panel panel-default">
+           <div class="panel-heading">
+              	 资源信息
+           </div>
+            <div class="panel-body">
+            	<p>资源信息详情</p>
+            	
+            	<ul id="ztree" class="ztree"></ul>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 <form class="form-inline" role="form" action="${ctx }/url/list" method="get">
